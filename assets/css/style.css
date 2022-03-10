@@ -158,8 +158,8 @@ transition: opacity 0.2s;
 .progress::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 16px;
-  height: 10px;
+  width: 20px;
+  height: 16px;
   background-color: var(--primary-color);
   cursor: pointer;
 }
