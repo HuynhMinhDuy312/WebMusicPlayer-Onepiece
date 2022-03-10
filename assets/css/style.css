@@ -147,12 +147,12 @@ background-color: var(--primary-color);
 .progress {
 width: 100%;
 -webkit-appearance: none;
-height: 10px;
+height: 16px;
 background: #d3d3d3;
-/* outline: none;
+outline: none;
 opacity: 0.7;
 -webkit-transition: 0.2s;
-transition: opacity 0.2s; */
+transition: opacity 0.2s;
 }
 
 .progress::-webkit-slider-thumb {
