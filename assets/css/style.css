@@ -163,6 +163,11 @@ background-color: var(--primary-color);
 cursor: pointer;
 }
 
+.duration {
+  display:flex;
+}
+
+
 /* PLAYLIST */
 .playlist {
   margin-top: 495px;

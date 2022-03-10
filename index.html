@@ -26,7 +26,7 @@
             <!-- Header -->
             <header>
                 <h4>Now playing:</h4>
-                <h2>String 57th & 9th</h2>
+                <h2></h2>
             </header>
 
             <div class="playlist-background"></div>
@@ -59,6 +59,12 @@
                 <div class="btn btn-random">
                     <i class="fas fa-random"></i>
                 </div>
+            </div>
+
+            <div class="duration">
+                <div class="current-playing-time">0:00</div>
+                <div>/</div>
+                <div class="music-duration">0:00</div>
             </div>
 
             <input
@@ -101,6 +107,8 @@
         const randomBtn = $('.btn-random');
         const repeatBtn = $('.btn-repeat');
         const bi = $('.playlist-background');
+        const currentTime = $('.current-playing-time');
+        const musicDur = $('.music-duration');
 
         const app = {
             currentIndex: 0,
@@ -223,7 +231,7 @@
                 this.config[key] = value;
                 localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify(this.config));
             },
-            render: function () {
+            renderPlaylist: function () {
                 const htmls = this.songs.map((song,index) => {
                     return `
                         <div class="song ${index === this.currentIndex ? 'active' : ''}" data-index="${index}">
@@ -307,6 +315,19 @@
                     if (audio.duration) {
                         const progressPercent =  audio.currentTime / audio.duration * 100;
                         progress.value = progressPercent;
+
+                        minutesCur = parseInt(audio.currentTime / 60, 10);
+                        secondsCur = parseInt(audio.currentTime % 60, 10);
+                        minutesCur = minutesCur < 10 ? "0" + minutesCur : minutesCur;
+                        secondsCur = secondsCur < 10 ? "0" + secondsCur : secondsCur;
+
+                        minutesDur = parseInt(audio.duration / 60, 10);
+                        secondsDur = parseInt(audio.duration % 60, 10);
+                        minutesDur = minutesDur < 10 ? "0" + minutesDur : minutesDur;
+                        secondsDur = secondsDur < 10 ? "0" + secondsDur : secondsDur;
+
+                        currentTime.textContent = minutesCur + ':' + secondsCur;
+                        musicDur.textContent = minutesDur + ':' + secondsDur;
                     }
                 }
 
@@ -324,7 +345,7 @@
                         _this.nextSong();
                     }
                     audio.play();
-                    _this.render();
+                    _this.renderPlaylist();
                     _this.scrollToActiveSong();
                 }
 
@@ -337,7 +358,7 @@
                         _this.prevSong();
                     }
                     audio.play();
-                    _this.render();
+                    _this.renderPlaylist();
                     _this.scrollToActiveSong();
                 }
 
@@ -373,7 +394,7 @@
                         if(songNode) {
                             _this.currentIndex = Number(songNode.dataset.index);
                             _this.loadCurrentSong();
-                            _this.render();
+                            _this.renderPlaylist();
                             audio.play();
                         }
 
@@ -435,8 +456,8 @@
                 // Tải thông tin bài hát đầu tiên vào UI khi khởi động
                 this.loadCurrentSong();
 
-                // Render Playlist
-                this.render();
+                // RenderPlaylist Playlist
+                this.renderPlaylist();
 
                 // Hiến thị trạng thái ban đầu của button repeat và random
                 randomBtn.classList.toggle('active', this.isRandom);
