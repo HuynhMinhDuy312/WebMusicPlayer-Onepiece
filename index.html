@@ -355,9 +355,7 @@
                 // Xử lý khi tăng/giảm âm thanh
                 volumeBar.onchange = function (e) {
                     const seekVolume = e.target.value/100;
-                    audio.volumechange = function () {
-                        audio.volume = seekVolume;
-                    };
+                    audio.volume = seekVolume;
                 }
 
 
