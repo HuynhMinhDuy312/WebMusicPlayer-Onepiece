@@ -163,10 +163,26 @@ background-color: var(--primary-color);
 cursor: pointer;
 }
 
+.duration-and-volume {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .duration {
   display:flex;
 }
 
+.volume {
+  display:flex;
+  justify-content: space-between;
+}
+
+.volume-icon {
+  font-size: 16px;
+  color: black;
+  margin-right: 6px;
+}
 
 /* PLAYLIST */
 .playlist {
